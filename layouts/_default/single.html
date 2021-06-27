@@ -1,0 +1,55 @@
+<html>
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Document</title>
+</head>
+<body>
+
+    <!--Functions in Hugo-->
+    <h2>Functions in Hugo</h2>
+    Truncate function: {{truncate 15 "This is a really long string" }}<br/>
+    Addition function: {{ add 1 5}} <br>
+    String Functions: {{ singularize "dogs"}}<br/><br>
+    <!---->
+
+     <!--
+          <h1 style="color: {{ .Params.color}};">Single Template</h1><br/>
+-->
+    
+
+     <!--Accessing custom variables -->
+     <h2>Variables in Hugo</h2>
+     Custom Variable:</b> {{ $myVarName := "aString" }}
+     {{ $myVarName }}<br/>
+     <!---->
+     
+     <!--Access FrontMatter variable defined in a post (a.md) to custom layout template-->
+     FrontMatter Variable: {{ .Params.myVar }}<br>
+     <!---->
+
+     <!--Show title of the page/post dynamically-->
+        You are on page {{.Title}}   <br><br>
+     <!---->
+         
+     <!--Define main single template block-->
+     <!--{{define "main"}}
+            This is the single Template
+       {{end}}
+       {{define "footer"}}
+            This is the single footer 
+       {{end}}-->
+     <!-------->
+
+     {{ partial "header" (dict "Kind" .Kind "Template" "Single") }}
+    {{.Date}}
+     <div style="margin:25px;">
+          <h1>{{.Title}}</h1>
+          <div style="color:grey; font-size:16px;">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</div>
+          <div style="color:grey; font-size:16px;">{{if .Params.author}}Author: {{.Params.Author}}{{end}}</div>
+          <div style="font-size:18px;">{{.Content}}</div>
+     </div>
+     {{ partial "footer" . }}
+</body>
+</html>
